@@ -11,7 +11,7 @@ import java.util.TreeSet;
 public class Main {
 
     public static void main(String[] args) {
-        TreeSet<Shape> shapeTreeSet = new TreeSet<>( new Comparator<Shape>() {
+        TreeSet<Shape> shapeTreeSet = new TreeSet<>(new Comparator<Shape>() {
             @Override
             public int compare(Shape s1, Shape s2) {
                 return Double.compare(s1.getArea(), s2.getArea());
