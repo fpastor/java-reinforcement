@@ -7,13 +7,15 @@
 
 public class Student {
 
-
     private String name;
     private int age;
     private Gender gender;
     private double height;
     private double weight;
     private Notes notes;
+
+    public Student() {
+    }
 
     private Student(Builder builder) {
         this.name = builder.name;
@@ -75,12 +77,39 @@ public class Student {
         return notes;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
     public double getIMC() {
         return weight / Math.pow(height,2);
     }
 
+    public double getQualificationSubject(Subject subject) {
+        return notes.getQualificationForSubject(subject);
+    }
+
     public double getAverageQualification() {
         return notes.getAverageQualification();
+    }
+
+    public boolean isOfLegaAge() {
+        return age >= 18;
+    }
+
+    public static Student clone(Student student) {
+        return new Student.Builder()
+                .setName(student.name)
+                .setAge(student.age)
+                .setGender(student.gender)
+                .setHeight(student.height)
+                .setWeight(student.weight)
+                .setNotes(Notes.clone(student.getNotes()))
+                .build();
     }
 
 }

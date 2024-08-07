@@ -48,4 +48,73 @@ public class Notes {
 
         return qualificationsSum / subjects.length;
     }
+
+    public Subject getSubjectWithHigherQualification() {
+        Subject resultSubject = null;
+        double resultQualification = Double.MIN_VALUE;
+
+        for (HashMap.Entry<Subject, ArrayList<Double>> entry : reportCard.entrySet()) {
+            Subject subject = entry.getKey();
+            double qualification = this.getQualificationForSubject(subject);
+            if (qualification > resultQualification) {
+                resultQualification = qualification;
+                resultSubject = subject;
+            }
+        }
+        return  resultSubject;
+    }
+
+    public Subject getSubjectWithLowerQualification() {
+        Subject resultSubject = null;
+        double resultQualification = Double.MAX_VALUE;
+
+        for (HashMap.Entry<Subject, ArrayList<Double>> entry : reportCard.entrySet()) {
+            Subject subject = entry.getKey();
+            double qualification = this.getQualificationForSubject(subject);
+            if (qualification < resultQualification) {
+                resultQualification = qualification;
+                resultSubject = subject;
+            }
+        }
+        return  resultSubject;
+    }
+
+    public double getHigherQualification() {
+        double resultQualification = Double.MIN_VALUE;
+
+        for (HashMap.Entry<Subject, ArrayList<Double>> entry : reportCard.entrySet()) {
+            Subject subject = entry.getKey();
+            double qualification = this.getQualificationForSubject(subject);
+            if (qualification > resultQualification) {
+                resultQualification = qualification;
+            }
+        }
+        return  resultQualification;
+    }
+
+    public double getLowerQualification() {
+        double resultQualification = Double.MAX_VALUE;
+
+        for (HashMap.Entry<Subject, ArrayList<Double>> entry : reportCard.entrySet()) {
+            Subject subject = entry.getKey();
+            double qualification = this.getQualificationForSubject(subject);
+            if (qualification < resultQualification) {
+                resultQualification = qualification;
+            }
+        }
+        return  resultQualification;
+    }
+
+    public static Notes clone(Notes notes) {
+        Notes cloneNotes = new Notes();
+        for (HashMap.Entry<Subject, ArrayList<Double>> entry : notes.reportCard.entrySet()) {
+            Subject subject = entry.getKey();
+            ArrayList<Double> qualifications = entry.getValue();
+            for (double qualification : qualifications) {
+                cloneNotes.addQualification(subject,qualification);
+            }
+        }
+        return cloneNotes;
+    }
+
 }
